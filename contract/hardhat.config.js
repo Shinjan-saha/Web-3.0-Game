@@ -6,8 +6,8 @@ module.exports = {
 
   networks: {
     mumbai: {
-      url: process.env.MUMBAI_RPC,
-      accounts: [process.env.PRIVATE_KEY],
+      url: "https://rpc-mumbai.maticvigil.com", // Replace with your actual RPC URL
+      accounts: ["c5053501342508420c9e39b3b147f8b7c930707855f4d6d9202b92e3f4845c27"], // Replace with your actual private key
     },
   },
 };
