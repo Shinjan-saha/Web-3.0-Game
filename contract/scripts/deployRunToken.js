@@ -1,32 +1,39 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// When running the script with `npx hardhat run <script>` you'll find the Hardhat
-// Runtime Environment's members available in the global scope.
+require('dotenv').config();
 const hre = require("hardhat");
 
-async function main() {
-  // Hardhat always runs the compile task when running scripts with its command
-  // line interface.
-  //
-  // If this script is run directly using `node` you may want to call compile
-  // manually to make sure everything is compiled
-  // await hre.run('compile');
+async function deployRunToken() {
+  // Load private key from environment variable
+  await hre.run('compile');
+  const privateKey = process.env.MNEMONIC;
 
-  // We get the contract to deploy
+  if (!privateKey) {
+    console.error("Private key not found in .env file");
+    process.exit(1);
+  }
+
+  // Get the contract factory
   const Greeter = await hre.ethers.getContractFactory("RunToken");
+
+  // Set up the wallet with the private key
+  const wallet = new hre.ethers.Wallet(privateKey);
+
+  // Deploy the contract
   const greeter = await Greeter.deploy();
-
   await greeter.deployed();
-  console.log("run token deployed to:", greeter.address);
+  console.log("RunToken deployed to:", greeter.address);
 
-  await greeter.mintTokens("0x06214f2E1e1896739D92F3526Bd496DC028Bd7F9", 55);
-  console.log("run tokens minted")
+  // Assuming that "mintTokens" is a function in your contract, make sure it exists
+  if (greeter.mintTokens) {
+    // Call the mintTokens function with some sample parameters
+    await greeter.mintTokens("0x06214f2E1e1896739D92F3526Bd496DC028Bd7F9", 55);
+    console.log("Run tokens minted");
+  } else {
+    console.log("mintTokens function not found in the contract");
+  }
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main()
+// Run the deployment function and handle errors
+deployRunToken()
   .then(() => process.exit(0))
   .catch((error) => {
     console.error(error);
