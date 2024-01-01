@@ -14,6 +14,7 @@ Players collect and stake tokens within the game to progress and increase their 
 <li>Participate in an innovative, user-friendly game</li>
 
 # How to Play
+<li> Play in Desktop to avoid hassle of Metamask Transction in Mobile</li>
 <li>Download and install MetaMask, a browser-based Ethereum wallet that allows you to interact with decentralized applications.</li>
 <li>Create an account and add funds to your MetaMask wallet.</li>
 <li>Connect your MetaMask wallet to the Web3.0 Token Game by clicking on the "Connect to MetaMask" button.</li>
