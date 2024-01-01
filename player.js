@@ -26,8 +26,8 @@ export function setupPlayer() {
   document.addEventListener("keydown", onJump);
 
   // Add touch event listeners for mobile devices
-  document.removeEventListener("touchstart", onTouchStart);
-  document.addEventListener("touchstart", onTouchStart);
+  playerElem.removeEventListener("touchstart", onTouchStart);
+  playerElem.addEventListener("touchstart", onTouchStart);
 }
 
 export function updatePlayer(delta, speedScale) {
@@ -78,9 +78,12 @@ function onJump(e) {
 }
 
 function onTouchStart(e) {
-  // Check if there is a touch event
-  if (e.touches.length > 0 && !isJumping) {
+  // Prevent default touch behavior (e.g., scrolling)
+  e.preventDefault();
+
+  if (!isJumping) {
     yVelocity = JUMP_SPEED;
     isJumping = true;
   }
 }
+h
